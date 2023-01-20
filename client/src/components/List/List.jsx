@@ -1,48 +1,53 @@
-import React from 'react'
+import { Skeleton } from '@mui/material'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Card from '../Card/Card'
 import "./List.scss"
 
-const List = () => {
-    const data = [
-        {
-          id:1,
-          img:"https://images.pexels.com/photos/1163194/pexels-photo-1163194.jpeg?auto-compress&cs-tinysrgb&w=1600",
-          img2:"https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto-compress&cs-tinys",
-          title:"long Sleeve Graphic T-shirt",
-          isNew:true,
-          oldPrice:19,
-          price:12,
-        },
-        {
-          id:2,
-          img:"https://images.pexels.com/photos/1972115/pexels-photo-1972115.jpeg?auto-compress&cs=tinysrgb&w=1600",
-          title:"Coat",
-          isNew:true,
-          oldPrice:19,
-          price:12,
-        },
-        {
-          id:3,
-          img:"https://images.pexels.com/photos/2065200/pexels-photo-2065200.jpeg?auto-compress&cs-tinys",
-          title:"Skirt",
-          oldPrice:19,
-          price:12,
-        },
-        {
-          id:4,
-          img:"https://images.pexels.com/photos/1457983/pexels-photo-1457983.jpeg?auto-compress&cs-tinys",
-          title:"Hat",
-          oldPrice:19,
-          price:12,
-        },
-      ]
+const List = ({ subCats, maxPrice, sort, catId }) => {
+  const [data, setData] = useState([])
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  console.log("sort", sort)
+  const path = `/products?populate=*&[filters][categories][id]=${catId}${subCats.map(
+    (item) => `&[filters][sub_categories][id][$eq]=${item}`
+  )}&[filters][price][$lte]=${maxPrice}&sort=price:${sort}`
+  //`/products?populate=*&filters[categories][id][$eq]=${catId}${subCats.map(item=>
+  //`&[filters][sub_categories][id][$eq]=${item}`)}&[filters][price][$lte]=${maxPrice}&sort=price:${sort}`
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(process.env.REACT_APP_API_URL + path, {
+          headers: {
+            Authorization: "bearer" + process.env.REACT_APP_API_TOKEN
+          }
+        })
+        console.log("Data : ", res)
+        setData(res.data.data)
+      } catch (error) {
+        setError(true);
+      }
+      setLoading(false);
+    }
+    fetchData()
+  }, [path])
+
+
+
   return (
     <div className='list'>
-     {/* {
-        data?.map(item=>(
+      {
+        loading ?
+          data?.forEach(()=> (
+            <Skeleton variant="rectangular" width={210} height={118} />
+          ))
+          :
+          data?.map(item => (
             <Card item={item} key={item.id} />
-        ))
-     } */}
+          ))
+      }
     </div>
   )
 }

@@ -9,12 +9,14 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import "./app.scss"
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 const Layout =() =>{
   return(
     <div className="app">
       <Navbar/>
       <Outlet/>
       <Footer/>
+      
     </div>
   )
 }
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product />,
+      },
+      {
+        path: "/product/:*",
+        element: <PageNotFound />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },

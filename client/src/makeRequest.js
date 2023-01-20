@@ -7,8 +7,8 @@ export const makeRequest = axios.create({
     },
   });
 
-  console.log("first", process.env.REACT_APP_API_URL)
-  console.log("fsssst", process.env.REACT_APP_API_TOKEN)
+  //console.log("first", process.env.REACT_APP_API_URL)
+  //console.log("fsssst", process.env.REACT_APP_API_TOKEN)
 
 
   
