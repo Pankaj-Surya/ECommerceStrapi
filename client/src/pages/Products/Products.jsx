@@ -15,7 +15,7 @@ const Products = () => {
  //console.log("catId: " + catId)
  //categories id
  
- console.log(maxPrice)
+ //console.log(maxPrice)
  // category wise filtering -> /catId  -> 1-men 2-women 
  // subcat mey konse products ka cat same hai
 const path =  `/sub-categories?populate=*&filters[categories][id][$eq]=${catId}`
@@ -39,7 +39,7 @@ useEffect(() => {
 fetchData()
 }, [path])
 
-console.log(data)
+//console.log(data)
 
 
 const handleChange = (e) =>{

@@ -1,7 +1,10 @@
 import {
+  BrowserRouter,
   createBrowserRouter,
   Outlet,
+  Route,
   RouterProvider,
+  Routes,
 } from "react-router-dom";
 import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
@@ -10,13 +13,13 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import "./app.scss"
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-const Layout =() =>{
-  return(
+const Layout = () => {
+  return (
     <div className="app">
-      <Navbar/>
-      <Outlet/>
-      <Footer/>
-      
+      <Navbar />
+      <Outlet />
+      <Footer />
+
     </div>
   )
 }
@@ -42,18 +45,41 @@ const router = createBrowserRouter([
         path: "/product/:*",
         element: <PageNotFound />,
       },
-      {
-        path: "*",
-        element: <PageNotFound />,
-      },
+
     ],
   },
 ])
 
 function App() {
+
+  const Layout = () => {
+    <>
+      <Navbar />
+      <Footer />
+      <Outlet />
+    </>
+  }
   return (
     <div>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={(
+              <>
+                <Navbar />
+                <Outlet />
+                <Footer />
+              </>
+            )}
+          >
+            <Route exact path='/' element={<Home />} />
+            <Route exact path="/products/:id" element={<Products />} />
+            <Route exact path='/product/:id' element={<Product />} />
+          </Route>
+          {/* <Route path="*" element={ <PageNotFound />} /> */}
+        </Routes>
+
+      </BrowserRouter>
     </div>
   );
 }

@@ -49,7 +49,7 @@ const Product = () => {
   //console.log("data", data)
 
   const handleAddToCart = () => {
-    console.log("click")
+    //console.log("click")
     dispatch(addToCart(
       {
         id: data?.id,

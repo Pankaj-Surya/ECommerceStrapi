@@ -1,3 +1,7 @@
+client : yarn start
+api : yarn develop
+
+
 const data = [
         {
           id:1,
