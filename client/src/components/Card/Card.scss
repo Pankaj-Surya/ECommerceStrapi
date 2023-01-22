@@ -50,6 +50,9 @@
       display: flex;
       gap: 20px;
 
+   
+ 
+
       h3 {
          font-size: 18px;
          font-weight: 500;
@@ -60,4 +63,9 @@
          }
       }
    }
+}
+
+.link{
+   color: inherit;
+   text-decoration: none;
 }

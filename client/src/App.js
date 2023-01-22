@@ -1,6 +1,7 @@
 import {
   BrowserRouter,
   createBrowserRouter,
+  Navigate,
   Outlet,
   Route,
   RouterProvider,
@@ -13,6 +14,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import "./app.scss"
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 const Layout = () => {
   return (
     <div className="app">
@@ -52,13 +55,13 @@ const router = createBrowserRouter([
 
 function App() {
 
-  const Layout = () => {
-    <>
-      <Navbar />
-      <Footer />
-      <Outlet />
-    </>
-  }
+  // const Layout = () => {
+  //   <>
+  //     <Navbar />
+  //     <Footer />
+  //     <Outlet />
+  //   </>
+  // }
   return (
     <div>
       <BrowserRouter>
@@ -76,6 +79,9 @@ function App() {
             <Route exact path="/products/:id" element={<Products />} />
             <Route exact path='/product/:id' element={<Product />} />
           </Route>
+          <Route exact path='/login' element={<Login/>} />
+          <Route exact path='/register' element={<Register/>} />
+          <Route path="/*" element={<Navigate to="/" replace />} />
           {/* <Route path="*" element={ <PageNotFound />} /> */}
         </Routes>
 

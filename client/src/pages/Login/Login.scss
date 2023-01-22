@@ -1,0 +1,42 @@
+
+.container{
+    padding: 8% 0 0;
+    width: 365px;
+    margin: auto;
+  }
+  
+  .form{
+    position: relative;
+    z-index: 1;
+    max-width: 350px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    background: #FFFFFF;
+  }
+  
+  .form {
+    input{
+
+      
+      ::placeholder {
+        color: #90A4AE;
+      }
+    }
+    
+    .btn{
+     
+    }
+    
+    .message {
+    
+      a {
+        text-decoration: none;
+        color: #00BFA5;
+      }
+    }
+  }
+  
+  .form .register-form{
+    display: none;
+  }
+  

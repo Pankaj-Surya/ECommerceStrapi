@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, resetCart } from '../../redux/cartReducer';
 import { makeRequest } from '../../makeRequest';
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
   // const products = [
   //   {
@@ -44,6 +45,11 @@ const Cart = () => {
   //   },
   // ]
   const products = useSelector(state=>state.cart.products)
+  const user = useSelector(state=>state.user.currentUser);
+  console.log("user",user);
+
+  const navigate = useNavigate();
+  //console.log("sssssss")
   const dispatch = useDispatch();
   function totalPrice(){
    let total =0;
@@ -56,20 +62,27 @@ const Cart = () => {
   const stripePromise = loadStripe(
     "pk_test_51MJe8TSFYzfchjAqFi5aMkAeDEQrx3luGPDX7unVvGW8t30haGc6foLAqvyABXtVTcIX8UMCv5f9ni8NmDoMhLtN00yto5fy0i"
   );
+
+
   const handlePayment = async () => {
-    try {
-      const stripe = await stripePromise;
-      const res = await makeRequest.post("/orders", {
-        products,
-      });
-      await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-     
-    } catch (err) {
-      console.log(err);
-    }
-    dispatch(resetCart());
+    if(!user){
+      navigate("/login");
+    }else{
+      try {
+        const stripe = await stripePromise;
+        const res = await makeRequest.post("/orders", {
+          products,
+        });
+        await stripe.redirectToCheckout({
+          sessionId: res.data.stripeSession.id,
+        });
+       
+      } catch (err) {
+        console.log(err);
+      }
+      dispatch(resetCart());
+    }   
+   
   };
   return (
     <div className='cart'>
