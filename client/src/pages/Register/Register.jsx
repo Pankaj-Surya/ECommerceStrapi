@@ -1,6 +1,7 @@
+import { TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate, useRouteError } from 'react-router-dom';
+import { Link, useNavigate, useRouteError } from 'react-router-dom';
 import { makeRequest } from '../../makeRequest';
 import "./Register.scss"
 const Register = () => {
@@ -24,6 +25,7 @@ const Register = () => {
       .then(response => {
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
+        navigate("/login");
       })
       .catch(error => {
         console.log('An error occurred:', error.response);
@@ -38,22 +40,49 @@ const Register = () => {
   
     return (
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" name="username" onChange={e => handleChange(e)} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="text" name="email" onChange={e => handleChange(e)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" onChange={e => handleChange(e)} />
-        </label>
-        <br />
-        <button>Register</button>
+       <div className="signup">
+        <div className="signup-container">
+          <TextField
+            fullWidth
+            type="text"
+            name="username"
+            size="small"
+            margin="dense"
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
+            onChange={(e) => handleChange(e)}
+          />
+
+          <TextField
+            fullWidth
+            type="text"
+            name="email"
+            size="small"
+            margin="dense"
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            onChange={(e) => handleChange(e)}
+          />
+          <TextField
+
+            fullWidth
+            size="small"
+            margin="dense"
+            type="password"
+            name="password"
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            onChange={(e) => handleChange(e)}
+          />
+          <button>Signup</button>
+          <Link className="link" to="/login">
+            <span>Login</span>
+          </Link>
+        </div>
+      </div>
       </form>
 )}
 

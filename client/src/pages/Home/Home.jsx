@@ -15,7 +15,7 @@ const Home = () => {
     const msg = window.location.href.split("?")[1];
     console.log(msg);
     if (msg == "success=true") {
-       alert("Order Placed Syccessfully!");
+       //alert("Order Placed Syccessfully!");
       dispatch(resetCart());
     }
   }, [url]);

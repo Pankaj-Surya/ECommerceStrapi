@@ -6,6 +6,7 @@ import { removeItem, resetCart } from '../../redux/cartReducer';
 import { makeRequest } from '../../makeRequest';
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Cart = () => {
   // const products = [
   //   {

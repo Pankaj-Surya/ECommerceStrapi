@@ -16,6 +16,7 @@ import "./app.scss"
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Order from "./pages/Order/Order";
 const Layout = () => {
   return (
     <div className="app">
@@ -78,6 +79,7 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route exact path="/products/:id" element={<Products />} />
             <Route exact path='/product/:id' element={<Product />} />
+            <Route exact path='/order' element={<Order/>} />
           </Route>
           <Route exact path='/login' element={<Login/>} />
           <Route exact path='/register' element={<Register/>} />
