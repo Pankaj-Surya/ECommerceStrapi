@@ -25,7 +25,7 @@ const List = ({ subCats, maxPrice, sort, catId }) => {
             Authorization: "bearer" + process.env.REACT_APP_API_TOKEN
           }
         })
-        console.log("Data : ", res)
+        //console.log("Data : ", res)
         setData(res.data.data)
       } catch (error) {
         setError(true);

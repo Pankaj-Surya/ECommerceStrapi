@@ -47,7 +47,7 @@ const Cart = () => {
   const products = useSelector(state=>state.cart.products)
   const user = useSelector(state=>state.user.currentUser);
   console.log("user",user);
-
+  console.log("prod",products)
   const navigate = useNavigate();
   //console.log("sssssss")
   const dispatch = useDispatch();
@@ -72,7 +72,9 @@ const Cart = () => {
         const stripe = await stripePromise;
         const res = await makeRequest.post("/orders", {
           products,
+          email : user.email 
         });
+        console.log(res)
         await stripe.redirectToCheckout({
           sessionId: res.data.stripeSession.id,
         });
@@ -80,7 +82,7 @@ const Cart = () => {
       } catch (err) {
         console.log(err);
       }
-      dispatch(resetCart());
+      //dispatch(resetCart());
     }   
    
   };

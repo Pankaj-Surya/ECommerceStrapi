@@ -48,7 +48,7 @@ const handleChange = (e) =>{
   setSelectedSubCats(isChecked ? [...selectedSubCats,value] :
     selectedSubCats.filter((item)=> item != value))
 }
-console.log("selectedSubCats",selectedSubCats)
+//console.log("selectedSubCats",selectedSubCats)
  return (
     <div className='products'>
       <div className="left">

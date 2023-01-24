@@ -4,18 +4,20 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     currentUser: null,
-    // isFetching: true,
-    // error: true,
+    isFetching: false,
+    error: false,
   },
   reducers: {
     loginStart: (state) => {
-      state.isFetching = true;
+      state.isFetching = false;
       state.error = false;
     },
     loginSuccess: (state, action) => {
-    // console.log("Action",action.payload) 
+      //const us = action.payload
+      //console.log(us)
      state.currentUser = action.payload;
      state.isFetching = false;
+     state.error = false;
     },
     loginFailure: (state) => {
       state.error=true;

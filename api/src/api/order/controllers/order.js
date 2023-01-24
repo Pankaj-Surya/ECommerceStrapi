@@ -8,8 +8,9 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
-    const { products,email } = ctx.request.body;
+    const { email,products } = ctx.request.body;
     console.log("ctx.request.body : ",ctx.request.body)
+    console.log("prods ",products)
     try {
       const lineItems = await Promise.all(
         products.map(async (product) => {
@@ -41,7 +42,9 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
 
       await strapi
         .service("api::order.order")
-        .create({ data: {  products, stripeId: session.id,email } });
+        .create({ data: {  products, 
+                    stripeId: session.id,
+                    email:email } });
 
       return { stripeSession: session };
     } catch (error) {

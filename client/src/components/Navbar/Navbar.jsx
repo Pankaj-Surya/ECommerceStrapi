@@ -56,14 +56,17 @@ const Navbar = () => {
            </div>
            <div className="right">
            <div className="items">
-            <Link className="link" to="/">Homepage</Link>
+            <Link className="link" >{user && ("Welcome "+JSON.stringify(user.username.toUpperCase()))}</Link>
            </div>
-           <div className="items">
-            <Link className="link" to="/">About</Link>
-           </div>
-           <div className="items">
-            <Link  className="link"to="/">Contact</Link>
-           </div>
+           {
+             user ? ( <div className="items">
+             <Link  className="link"to="/" onClick={handleLogout}>Logout</Link>
+            </div>) : (<div className="items">
+            <Link className="link" to="/login">Login</Link>
+           </div>) 
+           }
+           
+          
            <div className="items">
             <Link className="link" to="/">Stores</Link>
            </div>

@@ -20,7 +20,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(userData.identifier);
-      loginCall(dispatch,userData)
+      
       axios
       .post('http://localhost:1337/api/auth/local', {
         identifier: userData.identifier,
@@ -29,9 +29,9 @@ const Login = () => {
       .then(response => {
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
-        
+        loginCall(dispatch,userData)
         //dispatch(loginSuccess(response.data.user));    
-       // navigate("/")
+        navigate("/")
      })
       .catch(error => {
         console.log('An error occurred:', error.response);
